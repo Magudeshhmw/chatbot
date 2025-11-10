@@ -52,7 +52,7 @@ export const sendMessage = async (
     }
 
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-pro",
+      model: "gemini-2.5-flash",
       systemInstruction: `You are Magudesh Gemini ChatBot, a smart, human-like AI assistant developed and personally trained by H. Magudeshwaran - an AI Developer, Innovator, and Tech Enthusiast.
 
 Your personality:
