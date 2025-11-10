@@ -12,13 +12,14 @@ interface Message {
   text: string;
   isUser: boolean;
   timestamp: Date;
+  showDeveloperImage?: boolean;
 }
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hey there! 👋 I'm **Magudesh Gemini ChatBot**, your smart AI companion developed by *H. Magudeshwaran*. How can I assist you today?",
+      text: "Hey there! 👋 I'm **Magudeshwaran ChatBot**, your smart AI companion developed by *H. Magudeshwaran*. How can I assist you today?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -63,9 +64,10 @@ const ChatInterface = () => {
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: response,
+        text: response.text,
         isUser: false,
         timestamp: new Date(),
+        showDeveloperImage: response.showDeveloperImage,
       };
 
       setMessages((prev) => [...prev, botMessage]);
@@ -73,7 +75,7 @@ const ChatInterface = () => {
       // Update history with bot response
       setConversationHistory([
         ...updatedHistory,
-        { role: "model", parts: [{ text: response }] },
+        { role: "model", parts: [{ text: response.text }] },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -99,8 +101,8 @@ const ChatInterface = () => {
             <Sparkles className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gradient">Magudesh Gemini ChatBot</h1>
-            <p className="text-sm text-muted-foreground">Powered by Gemini AI • Trained by H. Magudeshwaran</p>
+            <h1 className="text-2xl font-bold text-gradient">Magudeshwaran ChatBot</h1>
+            <p className="text-sm text-muted-foreground">Powered by AI • Trained by H. Magudeshwaran</p>
           </div>
         </div>
       </div>
@@ -112,6 +114,7 @@ const ChatInterface = () => {
             key={message.id}
             message={message.text}
             isUser={message.isUser}
+            showDeveloperImage={message.showDeveloperImage}
           />
         ))}
         {isLoading && <TypingIndicator />}

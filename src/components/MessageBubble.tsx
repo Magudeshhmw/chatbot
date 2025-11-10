@@ -5,9 +5,10 @@ import { Bot, User } from "lucide-react";
 interface MessageBubbleProps {
   message: string;
   isUser: boolean;
+  showDeveloperImage?: boolean;
 }
 
-const MessageBubble = ({ message, isUser }: MessageBubbleProps) => {
+const MessageBubble = ({ message, isUser, showDeveloperImage }: MessageBubbleProps) => {
   return (
     <div className={`flex gap-3 ${isUser ? "flex-row-reverse" : "flex-row"} items-start max-w-[85%] ${isUser ? "ml-auto" : "mr-auto"}`}>
       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
@@ -25,6 +26,15 @@ const MessageBubble = ({ message, isUser }: MessageBubbleProps) => {
           ? "bg-chat-user glass-card" 
           : "glass-card gradient-border"
       }`}>
+        {showDeveloperImage && (
+          <div className="mb-4 flex justify-center">
+            <img 
+              src="/src/assets/developer.jpg" 
+              alt="H. Magudeshwaran - AI Developer" 
+              className="rounded-lg max-w-xs w-full object-cover border-2 border-primary/30 glow-effect"
+            />
+          </div>
+        )}
         <div className="prose prose-invert prose-sm max-w-none">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}

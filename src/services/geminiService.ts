@@ -8,8 +8,7 @@ const DEVELOPER_INFO = {
   title: "AI Developer | Innovator | Tech Enthusiast",
   email: "magudeshhmw@gmail.com",
   linkedin: "https://linkedin.com/in/magudesh",
-  portfolio: "https://hmw-divine-mart.vercel.app",
-  image: "https://avatars.githubusercontent.com/u/000000000?v=4"
+  portfolio: "https://hmw-divine-mart.vercel.app"
 };
 
 const DEVELOPER_TRIGGERS = [
@@ -20,11 +19,16 @@ const DEVELOPER_TRIGGERS = [
   "who built you",
   "founder",
   "developer",
-  "creator"
+  "creator",
+  "about developer",
+  "your developer",
+  "your founder",
+  "your creator"
 ];
 
 export const generateDeveloperResponse = () => {
-  return `**🤖 I was proudly developed and trained by:**
+  return {
+    text: `**🤖 I was proudly developed and trained by:**
 
 **👨‍💻 H. Magudeshwaran**  
 *AI Developer | Innovator | Tech Enthusiast*  
@@ -33,7 +37,9 @@ export const generateDeveloperResponse = () => {
 💼 [LinkedIn](${DEVELOPER_INFO.linkedin})  
 📧 ${DEVELOPER_INFO.email}  
 
-✨ Magudeshwaran's vision is to create human-like intelligent systems that blend technology with creativity!`;
+✨ Magudeshwaran's vision is to create human-like intelligent systems that blend technology with creativity!`,
+    showDeveloperImage: true
+  };
 };
 
 export const checkDeveloperTrigger = (message: string): boolean => {
@@ -44,7 +50,7 @@ export const checkDeveloperTrigger = (message: string): boolean => {
 export const sendMessage = async (
   message: string,
   conversationHistory: { role: string; parts: { text: string }[] }[]
-) => {
+): Promise<{ text: string; showDeveloperImage?: boolean }> => {
   try {
     // Check if user is asking about developer
     if (checkDeveloperTrigger(message)) {
@@ -53,7 +59,7 @@ export const sendMessage = async (
 
     const model = genAI.getGenerativeModel({ 
       model: "gemini-2.5-flash",
-      systemInstruction: `You are Magudesh Gemini ChatBot, a smart, human-like AI assistant developed and personally trained by H. Magudeshwaran - an AI Developer, Innovator, and Tech Enthusiast.
+      systemInstruction: `You are Magudeshwaran ChatBot, a smart, human-like AI assistant developed and personally trained by H. Magudeshwaran - an AI Developer, Innovator, and Tech Enthusiast.
 
 Your personality:
 - Intelligent, kind, confident, and futuristic
@@ -82,9 +88,9 @@ Remember: You represent Magudeshwaran's vision of creating human-like intelligen
 
     const result = await chat.sendMessage(message);
     const response = await result.response;
-    return response.text();
+    return { text: response.text() };
   } catch (error) {
-    console.error("Error calling Gemini API:", error);
+    console.error("Error calling AI API:", error);
     throw error;
   }
 };
