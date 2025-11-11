@@ -7,8 +7,9 @@ const DEVELOPER_INFO = {
   name: "H. Magudeshwaran",
   title: "AI Developer | Innovator | Tech Enthusiast",
   email: "magudeshhmw@gmail.com",
-  linkedin: "https://linkedin.com/in/magudesh",
-  portfolio: "https://hmw-divine-mart.vercel.app"
+  linkedin: "https://www.linkedin.com/in/magudesh/",
+  portfolio: "https://magudeshhmw.github.io/its_me/",
+  github: "https://github.com/Magudeshhmw/"
 };
 
 const DEVELOPER_TRIGGERS = [
@@ -30,14 +31,16 @@ export const generateDeveloperResponse = () => {
   return {
     text: `**🤖 I was proudly developed and trained by:**
 
-**👨‍💻 H. Magudeshwaran**  
-*AI Developer | Innovator | Tech Enthusiast*  
+- **👨‍💻 ${DEVELOPER_INFO.name}**
+- ${DEVELOPER_INFO.title}
 
-🌐 [Portfolio](${DEVELOPER_INFO.portfolio})  
-💼 [LinkedIn](${DEVELOPER_INFO.linkedin})  
-📧 ${DEVELOPER_INFO.email}  
+**Quick links**
+- 🌐 [Portfolio](${DEVELOPER_INFO.portfolio})
+- 🐙 [GitHub](${DEVELOPER_INFO.github})
+- 💼 [LinkedIn](${DEVELOPER_INFO.linkedin})
+- 📧 [Email](mailto:${DEVELOPER_INFO.email})
 
-✨ Magudeshwaran's vision is to create human-like intelligent systems that blend technology with creativity!`,
+✨ Vision: Building human‑like intelligent systems that blend technology with creativity.`,
     showDeveloperImage: true
   };
 };

@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Bot, User } from "lucide-react";
+import developerImg from "@/assets/developer.jpg";
 
 interface MessageBubbleProps {
   message: string;
@@ -29,7 +30,12 @@ const MessageBubble = ({ message, isUser, showDeveloperImage }: MessageBubblePro
         {showDeveloperImage && (
           <div className="mb-4 flex justify-center">
             <img 
-              src="/src/assets/developer.jpg" 
+              src={"/me.jpg"}
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src = developerImg;
+              }}
               alt="H. Magudeshwaran - AI Developer" 
               className="rounded-lg max-w-xs w-full object-cover border-2 border-primary/30 glow-effect"
             />
@@ -46,7 +52,7 @@ const MessageBubble = ({ message, isUser, showDeveloperImage }: MessageBubblePro
                   href={href} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-primary hover:text-secondary underline decoration-primary/50 hover:decoration-secondary/50 transition-colors"
+                  className="inline-flex items-center justify-center px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-secondary transition-colors shadow-sm mr-2 mb-2"
                 >
                   {children}
                 </a>
